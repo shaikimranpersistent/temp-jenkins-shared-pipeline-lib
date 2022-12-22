@@ -8,8 +8,6 @@ def call(String PROJECT_ID, String ATTESTOR_ID, String CONTAINER_PATH, String IM
         exit 0;
 
         else
-            printf "\n\n\n**** Attesting Image **** \n\n\n"
-
             gcloud beta container binauthz attestations sign-and-create  \
             --artifact-url="${CONTAINER_PATH}@${DIGEST}" \
             --attestor="${ATTESTOR_ID}" \
@@ -18,8 +16,6 @@ def call(String PROJECT_ID, String ATTESTOR_ID, String CONTAINER_PATH, String IM
             --keyversion-location="${KEY_LOCATION}" \
             --keyversion-keyring="${KEYRING}" \
             --keyversion-key="${KEY_NAME}" --keyversion="${KEY_VERSION}"
-
-            printf "\n\n\nImage successfully attested!\n\n\n"
         fi
     """
 }
