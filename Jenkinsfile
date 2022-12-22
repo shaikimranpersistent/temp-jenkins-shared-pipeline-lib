@@ -7,7 +7,7 @@ pipeline {
 
         PACKAGE_LOC = 'us-central1-docker.pkg.dev'
         REPO_NAME = 'java-app'
-        REPO_PATH = "${pwd}/$REPO_NAME"
+        REPO_PATH = "${pwd}" "$REPO_NAME"
         IMAGE_NAME = 'java-app'
         IMAGE_TAG = 'latest'
 
