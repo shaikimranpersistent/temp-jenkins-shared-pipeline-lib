@@ -7,7 +7,6 @@ pipeline {
 
         PACKAGE_LOC = 'us-central1-docker.pkg.dev'
         REPO_NAME = 'java-app'
-        REPO_PATH = "${pwd}" "$REPO_NAME"
         IMAGE_NAME = 'java-app'
         IMAGE_TAG = 'latest'
 
@@ -30,7 +29,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                buildDockerImage($REPO_PATH, $BRANCH_NAME, $IMAGE_NAME)
+                buildDockerImage($REPO_NAME, $BRANCH_NAME, $IMAGE_NAME)
             }
         }
     }
