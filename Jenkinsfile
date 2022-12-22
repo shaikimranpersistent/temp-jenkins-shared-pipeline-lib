@@ -7,10 +7,11 @@ pipeline {
 
         PACKAGE_LOC = 'us-central1-docker.pkg.dev'
         REPO_NAME = 'java-app'
+        REPO_PATH = "${pwd}/${REPO_NAME}"
         IMAGE_NAME = 'java-app'
         IMAGE_TAG = 'latest'
 
-        CONTAINER_PATH = "$PACKAGE_LOC/$PROJECT_ID/$REPO_NAME/$IMAGE_NAME"
+        CONTAINER_PATH = "${PACKAGE_LOC}/${PROJECT_ID}/${REPO_NAME}/${IMAGE_NAME}"
 
         KEY_LOCATION = 'global'
         KEYRING = 'binary-authorization-keys'
@@ -23,13 +24,13 @@ pipeline {
     stages {
         stage('Cloning CSR repo') {
             steps {
-                csrCloneRepo($REPO_NAME, $PROJECT_ID)
+                csrCloneRepo(${REPO_NAME}, ${PROJECT_ID})
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                buildDockerImage($REPO_NAME, $BRANCH_NAME, $IMAGE_NAME)
+                buildDockerImage(${REPO_PATH}, ${BRANCH_NAME}, ${IMAGE_NAME})
             }
         }
     }
