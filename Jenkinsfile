@@ -1,4 +1,4 @@
-@Library("pre-dev-temp-jenkins-shared-pipeline-lib")@main _
+@Library("pre-dev-temp-jenkins-shared-pipeline-lib") _
 
 pipeline {
     agent any
