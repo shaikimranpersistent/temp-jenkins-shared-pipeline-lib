@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage("Cloning CSR repo") {
             steps {
-                csrCloneRepo("java-app" "devsecops-co-demo")
+                csrCloneRepo("java-app", "devsecops-co-demo")
             }
         }
     }
