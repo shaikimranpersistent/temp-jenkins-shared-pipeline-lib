@@ -4,6 +4,7 @@ pipeline {
     agent any
 
     environment {
+        GCLOUD_CREDS=credentials('devsecops-co-demo-pk')
         PROJECT_ID = 'devsecops-co-demo'
 
         PACKAGE_LOC = 'us-central1-docker.pkg.dev'
@@ -24,8 +25,12 @@ pipeline {
     }
 
     stages {
-        stage {
-            authenticateServiceAccount(env.PROJECT_ID, env.ATTESTOR_ID, env.CONTAINER_PATH, env.IMAGE_NAME, env.KEY_LOCATION, env.KEYRING, env.KEY_NAME)
+        stage("Authenticating using service account") {
+            authenticateServiceAccount(env.GCLOUD_CREDS)
+        }
+
+        stage("Configuring docker with package location") {
+            configureDockerPackageLoc(env.PACKAGE_LOC)
         }
 
         stage('Cloning CSR repo') {
@@ -38,6 +43,12 @@ pipeline {
             steps {
                 buildDockerImage(env.REPO_NAME, env.BRANCH_NAME, env.IMAGE_NAME)
             }
+        }
+
+        stage("Attest Image") {
+            attestImage(env.PROJECT_ID, env.ATTESTOR_ID, 
+                        env.CONTAINER_PATH, env.IMAGE_NAME,
+                        env.KEY_LOCATION, env.KEYRING, env.KEY_NAME)
         }
     }
 
