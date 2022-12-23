@@ -18,4 +18,4 @@ def call(String PROJECT_ID, String ATTESTOR_ID, String CONTAINER_PATH, String IM
             --keyversion-key="$KEY_NAME" --keyversion="$KEY_VERSION"
         fi
     """
-
+}
