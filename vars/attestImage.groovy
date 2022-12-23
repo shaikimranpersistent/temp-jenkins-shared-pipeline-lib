@@ -1,6 +1,6 @@
 def call(String PROJECT_ID, String ATTESTOR_ID, String CONTAINER_PATH, String IMAGE_NAME, String KEY_LOCATION, String KEYRING, String KEY_NAME) {
     sh """
-        DIGEST=$(gcloud container images describe $CONTAINER_PATH:$IMAGE_TAG --format='get(image_summary.digest)')
+        DIGEST=gcloud container images describe $CONTAINER_PATH:$IMAGE_TAG --format='get(image_summary.digest)'
 
         if gcloud container binauthz attestations list --project="$PROJECT_ID" --attestor="projects/$PROJECT_ID/attestors/$ATTESTOR_ID" --artifact-url="$CONTAINER_PATH@$DIGEST" | grep -q $DIGEST ;
         then
