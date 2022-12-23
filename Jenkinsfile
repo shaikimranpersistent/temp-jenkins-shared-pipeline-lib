@@ -37,15 +37,21 @@ pipeline {
             }
         }
 
-        stage('Cloning CSR repo') {
+        stage("Cloning CSR repo") {
             steps {
                 csrCloneRepo(env.REPO_NAME, env.PROJECT_ID)
             }
         }
 
-        stage('Build Docker Image') {
+        stage("Build Docker Image") {
             steps {
                 buildDockerImage(env.REPO_NAME, env.BRANCH_NAME, env.IMAGE_NAME)
+            }
+        }
+
+        stage("Push to Artifact Registry") {
+            steps {
+                pushImageToArtifactRegistry(env.PROJECT_ID, env.REPO_NAME, end.PACKAGE_LOC, env.IMAGE_NAME, env.IMAGE_TAG)
             }
         }
 
@@ -60,9 +66,9 @@ pipeline {
 
     post {
       always {
-            sh '''
+            sh """
               rm -rf $REPO_NAME
-            '''
+            """
         }
     }
 }
