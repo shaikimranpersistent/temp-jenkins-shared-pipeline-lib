@@ -51,7 +51,7 @@ pipeline {
 
         stage("Push to Artifact Registry") {
             steps {
-                pushImageToArtifactRegistry(env.PROJECT_ID, env.REPO_NAME, end.PACKAGE_LOC, env.IMAGE_NAME, env.IMAGE_TAG)
+                pushImageToArtifactRegistry(env.PROJECT_ID, env.REPO_NAME, env.PACKAGE_LOC, env.IMAGE_NAME, env.IMAGE_TAG)
             }
         }
 
