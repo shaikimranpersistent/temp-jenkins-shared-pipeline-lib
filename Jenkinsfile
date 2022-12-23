@@ -26,11 +26,15 @@ pipeline {
 
     stages {
         stage("Authenticating using service account") {
-            authenticateServiceAccount(env.GCLOUD_CREDS)
+            steps {
+                authenticateServiceAccount(env.GCLOUD_CREDS)
+            }
         }
 
         stage("Configuring docker with package location") {
-            configureDockerPackageLoc(env.PACKAGE_LOC)
+            steps {
+                configureDockerPackageLoc(env.PACKAGE_LOC)
+            }
         }
 
         stage('Cloning CSR repo') {
@@ -46,9 +50,11 @@ pipeline {
         }
 
         stage("Attest Image") {
-            attestImage(env.PROJECT_ID, env.ATTESTOR_ID, 
+            steps {
+                attestImage(env.PROJECT_ID, env.ATTESTOR_ID, 
                         env.CONTAINER_PATH, env.IMAGE_NAME,
                         env.KEY_LOCATION, env.KEYRING, env.KEY_NAME)
+            }
         }
     }
 
