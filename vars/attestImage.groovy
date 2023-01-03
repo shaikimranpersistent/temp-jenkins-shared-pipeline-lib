@@ -1,6 +1,4 @@
-def call(String PROJECT_ID, String ATTESTOR_ID, String CONTAINER_PATH, String IMAGE_NAME, String KEY_LOCATION, String KEYRING, String KEY_NAME) {
-    DIGEST=getLatestDigest();
-
+def call(String PROJECT_ID, String ATTESTOR_ID, String CONTAINER_PATH, String IMAGE_NAME, String KEY_LOCATION, String KEYRING, String KEY_NAME, String DIGEST) {
     sh """
         if gcloud container binauthz attestations list --project="$PROJECT_ID" --attestor="projects/$PROJECT_ID/attestors/$ATTESTOR_ID" --artifact-url="$CONTAINER_PATH@$DIGEST" | grep -q $DIGEST ;
         then
@@ -17,9 +15,7 @@ def call(String PROJECT_ID, String ATTESTOR_ID, String CONTAINER_PATH, String IM
             --keyversion-keyring="$KEYRING" \
             --keyversion-key="$KEY_NAME" --keyversion="$KEY_VERSION"
         fi
-    """
-}
 
-def getLatestDigest(String CONTAINER_PATH, String IMAGE_TAG) {
-    return sh "gcloud container images describe $CONTAINER_PATH:$IMAGE_TAG --format='get(image_summary.digest)'"
+        unset DIGEST
+    """
 }

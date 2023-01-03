@@ -1,4 +1,4 @@
-def call(String repoName, String projectId) {
+def call() {
     sh """
         gcloud source repos clone ${repoName} --project=${projectId}
     """

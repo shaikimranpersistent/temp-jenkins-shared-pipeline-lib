@@ -1,4 +1,4 @@
-def call(String GCLOUD_CREDS) {
+def call() {
     sh """
         gcloud auth activate-service-account --key-file="$GCLOUD_CREDS"
     """

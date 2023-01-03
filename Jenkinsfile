@@ -22,46 +22,48 @@ pipeline {
         KEY_VERSION = '1'
 
         ATTESTOR_ID = 'attestor-uzair-shaikh'
+        DIGEST="""${sh(script: "gcloud container images describe $CONTAINER_PATH:$IMAGE_TAG --format='get(image_summary.digest)'", returnStdout: true).trim()}"""
     }
 
     stages {
-        stage("Authenticating using service account") {
+        stage("run Pipeline") {
             steps {
-                authenticateServiceAccount(env.GCLOUD_CREDS)
+                // authenticateServiceAccount(env.GCLOUD_CREDS)
+                runPipeline()
             }
         }
 
-        stage("Configuring docker with package location") {
-            steps {
-                configureDockerPackageLoc(env.PACKAGE_LOC)
-            }
-        }
+        // stage("Configuring docker with package location") {
+        //     steps {
+        //         configureDockerPackageLoc(env.PACKAGE_LOC)
+        //     }
+        // }
 
-        stage("Cloning CSR repo") {
-            steps {
-                csrCloneRepo(env.REPO_NAME, env.PROJECT_ID)
-            }
-        }
+        // stage("Cloning CSR repo") {
+        //     steps {
+        //         csrCloneRepo(env.REPO_NAME, env.PROJECT_ID)
+        //     }
+        // }
 
-        stage("Build Docker Image") {
-            steps {
-                buildDockerImage(env.REPO_NAME, env.BRANCH_NAME, env.IMAGE_NAME)
-            }
-        }
+        // stage("Build Docker Image") {
+        //     steps {
+        //         buildDockerImage(env.REPO_NAME, env.BRANCH_NAME, env.IMAGE_NAME)
+        //     }
+        // }
 
-        stage("Push to Artifact Registry") {
-            steps {
-                pushImageToArtifactRegistry(env.PROJECT_ID, env.REPO_NAME, env.PACKAGE_LOC, env.IMAGE_NAME, env.IMAGE_TAG)
-            }
-        }
+        // stage("Push to Artifact Registry") {
+        //     steps {
+        //         pushImageToArtifactRegistry(env.PROJECT_ID, env.REPO_NAME, env.PACKAGE_LOC, env.IMAGE_NAME, env.IMAGE_TAG)
+        //     }
+        // }
 
-        stage("Attest Image") {
-            steps {
-                attestImage(env.PROJECT_ID, env.ATTESTOR_ID, 
-                        env.CONTAINER_PATH, env.IMAGE_NAME,
-                        env.KEY_LOCATION, env.KEYRING, env.KEY_NAME)
-            }
-        }
+        // stage("Attest Image") {
+        //     steps {
+        //         attestImage(env.PROJECT_ID, env.ATTESTOR_ID, 
+        //                 env.CONTAINER_PATH, env.IMAGE_NAME,
+        //                 env.KEY_LOCATION, env.KEYRING, env.KEY_NAME, env.DIGEST)
+        //     }
+        // }
     }
 
     post {
