@@ -5,6 +5,7 @@ pipeline {
 
     environment {
         GCLOUD_CREDS=credentials('devsecops-co-demo-pk')
+        CLIENT_EMAIL=credentials('devsecops-co-demo-email')
     }
 
     stages {
