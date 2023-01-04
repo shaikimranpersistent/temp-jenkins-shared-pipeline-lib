@@ -1,5 +1,4 @@
 def call() {
-        stage
         authenticateServiceAccount();
         configureDockerPackageLoc();
         csrCloneRepo();
