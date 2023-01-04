@@ -23,6 +23,7 @@ pipeline {
             sh """
               rm -rf ${env.REPO_NAME}
             """
+            deAuthenticateSericeAccount()
         }
     }
 }

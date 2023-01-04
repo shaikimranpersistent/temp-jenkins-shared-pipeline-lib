@@ -5,5 +5,4 @@ def call() {
         buildDockerImage();
         pushImageToArtifactRegistry();
         attestImage();
-        // deAuthenticateSericeAccount();
 }
