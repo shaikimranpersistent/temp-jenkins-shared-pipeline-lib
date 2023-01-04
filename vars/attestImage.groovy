@@ -2,7 +2,7 @@ def call() {
     sh """
         if gcloud container binauthz attestations list --project="$PROJECT_ID" --attestor="projects/$PROJECT_ID/attestors/$ATTESTOR_ID" --artifact-url="$CONTAINER_PATH@$DIGEST" | grep -q $DIGEST ;
         then
-            printf "\n\n\nImage is already attested, skipping attestation!\n\n\n"
+            printf "\nImage is already attested, skipping attestation!\n"
         exit 0;
 
         else
