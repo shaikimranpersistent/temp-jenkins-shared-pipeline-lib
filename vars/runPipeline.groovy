@@ -1,19 +1,20 @@
 def call() {
-        printStageStartMsg("Authenitcation");
+        p = new printingMethods()
+        p.printStageStartMsg("Authenitcation");
         authenticateServiceAccount();
 
-        printStageStartMsg("Configuring Docker Package Loc");
+        p.printStageStartMsg("Configuring Docker Package Loc");
         configureDockerPackageLoc();
 
-        printStageStartMsg("CSR repo cloning");
+        p.printStageStartMsg("CSR repo cloning");
         csrCloneRepo();
 
-        printStageStartMsg("Building Docker Image");
+        p.printStageStartMsg("Building Docker Image");
         buildDockerImage();
 
-        printStageStartMsg("Pushing Image to Artifact Registry");
+        p.printStageStartMsg("Pushing Image to Artifact Registry");
         pushImageToArtifactRegistry();
 
-        printStageStartMsg("Attest Image");
+        p.printStageStartMsg("Attest Image");
         attestImage();
 }
