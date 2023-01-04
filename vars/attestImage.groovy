@@ -1,4 +1,4 @@
-def call(String PROJECT_ID, String ATTESTOR_ID, String CONTAINER_PATH, String IMAGE_NAME, String KEY_LOCATION, String KEYRING, String KEY_NAME, String DIGEST) {
+def call() {
     sh """
         if gcloud container binauthz attestations list --project="$PROJECT_ID" --attestor="projects/$PROJECT_ID/attestors/$ATTESTOR_ID" --artifact-url="$CONTAINER_PATH@$DIGEST" | grep -q $DIGEST ;
         then
