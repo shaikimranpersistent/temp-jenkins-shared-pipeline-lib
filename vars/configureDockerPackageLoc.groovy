@@ -1,4 +1,4 @@
-def call(String PACKAGE_LOC) {
+def call() {
     sh """
         gcloud auth configure-docker $PACKAGE_LOC
     """
