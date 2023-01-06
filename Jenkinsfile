@@ -3,6 +3,10 @@
 pipeline {
     agent any
 
+    options {
+        ansiColor(xterm)
+    }
+
     environment {
         GCLOUD_CREDS=credentials('devsecops-co-demo-pk')
         CLIENT_EMAIL=credentials('devsecops-co-demo-email')
@@ -21,10 +25,8 @@ pipeline {
 
     post {
       always {
-            sh """
-              rm -rf ${env.REPO_NAME}
-            """
-            deAuthenticateSericeAccount()
+            sh 'rm -rf ${env.REPO_NAME}'
+            // deAuthenticateSericeAccount()
         }
     }
 }

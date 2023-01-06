@@ -24,4 +24,8 @@ def call() {
         p.printStageStartMsg("Attest Image");
         attestImage();
         p.printStageSuccessMsg("Attest Image");
+
+        p.printStageStartMsg("Deploying Image");
+        deployImageToGkeCluster();
+        p.printStageSuccessMsg("Deploying Image");
 }
