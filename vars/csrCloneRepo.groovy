@@ -1,5 +1,6 @@
 def call() {
     sh """
-        gcloud source repos clone ${REPO_NAME} --project=${PROJECT_ID}
+        rm -rf $REPO_NAME
+        gcloud source repos clone $REPO_NAME --project=$PROJECT_ID
     """
 }

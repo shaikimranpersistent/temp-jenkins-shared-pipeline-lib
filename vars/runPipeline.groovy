@@ -17,6 +17,10 @@ def call() {
         buildDockerImage();
         p.printStageSuccessMsg("Building Docker Image");
 
+        p.printStageStartMsg("Trivy scan starting");
+        trivyScan();
+        p.printStageSuccessMsg("Trivy scan passed");
+
         p.printStageStartMsg("Pushing Image to Artifact Registry");
         pushImageToArtifactRegistry();
         p.printStageSuccessMsg("Pushing Image to Artifact Registry");
