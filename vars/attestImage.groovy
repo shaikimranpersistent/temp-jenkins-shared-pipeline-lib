@@ -1,5 +1,5 @@
 def call() {
-    sh """
+    sh '''
         DIGEST=$(gcloud container images describe ${CONTAINER_PATH} --format='get(image_summary.digest)')
         if gcloud container binauthz attestations list --project="$PROJECT_ID" --attestor="projects/$PROJECT_ID/attestors/$ATTESTOR_ID" --artifact-url="$CONTAINER_PATH@$DIGEST" | grep -q $DIGEST ;
         then
@@ -18,5 +18,5 @@ def call() {
         fi
 
         unset DIGEST
-    """
+    '''
 }
