@@ -1,5 +1,5 @@
 def call() {
     sh """
-        docker push $CONTAINER_PATH
+        docker push $CONTAINER_PATH_TAGGED
     """
 }
