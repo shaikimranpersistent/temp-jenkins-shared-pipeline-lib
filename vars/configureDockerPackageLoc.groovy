@@ -1,5 +1,5 @@
 def call() {
     sh """
-        gcloud auth configure-docker $PACKAGE_LOC
+        gcloud auth configure-docker $REGISTRY_LOC
     """
 }
