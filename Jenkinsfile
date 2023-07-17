@@ -13,7 +13,7 @@ pipeline {
     }
 
     stages {
-        stage("run Pipeline") {
+        stage("runeverything Pipeline") {
             steps {
                 script {
                     load '/home/shaik_imran/jenkins_temp_resources/java_env_vars.groovy'
